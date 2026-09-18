@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -6,6 +8,7 @@ plugins {
 android {
     namespace = "com.mgghost.assistant"
     compileSdk = 35
+
     defaultConfig {
         applicationId = "com.mgghost.assistant"
         minSdk = 26
@@ -13,15 +16,41 @@ android {
         versionCode = 10
         versionName = "6.2.1"
     }
-    buildFeatures { buildConfig = true }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     buildTypes {
         getByName("debug") {
-            buildConfigField("String", "API_BASE_URL", "\"https://mg-ghost-api.onrender.com\"")
+            buildConfigField(
+                "String",
+                "API_BASE_URL",
+                "\"https://mg-ghost-api.onrender.com\""
+            )
         }
+
         getByName("release") {
             isMinifyEnabled = false
-            buildConfigField("String", "API_BASE_URL", "\"https://mg-ghost-api.onrender.com\"")
+            buildConfigField(
+                "String",
+                "API_BASE_URL",
+                "\"https://mg-ghost-api.onrender.com\""
+            )
         }
+    }
+}
+
+kotlin {
+    jvmToolchain(17)
+
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
     }
 }
 
