@@ -1,0 +1,16 @@
+<resources>
+    <color name="ghost_bg">#F7F9FF</color>
+    <color name="ghost_surface">#FFFFFF</color>
+    <color name="ghost_surface2">#EEF4FF</color>
+    <color name="ghost_blue">#2F7CF6</color>
+    <color name="ghost_blue_dark">#1D4ED8</color>
+    <color name="ghost_purple">#7C5CFF</color>
+    <color name="ghost_green">#18B66A</color>
+    <color name="ghost_text">#15213B</color>
+    <color name="ghost_muted">#71809A</color>
+    <color name="ghost_border">#D9E2F2</color>
+    <color name="ghost_soft_blue">#E8F1FF</color>
+    <color name="ghost_soft_green">#EAF9F1</color>
+    <color name="ghost_soft_purple">#F0EAFF</color>
+    <color name="ghost_soft_yellow">#FFF6D9</color>
+</resources>
