@@ -28,7 +28,7 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v4
         with:
-          packages: |
+          packages: >-
             platform-tools
             platforms;android-35
             build-tools;35.0.0
@@ -38,18 +38,23 @@ jobs:
         shell: bash
         run: |
           set -e
+
           PROJECT_SETTINGS="$(find . -type f \( -name 'settings.gradle' -o -name 'settings.gradle.kts' \) -not -path './.git/*' | head -n 1)"
+
           if [ -z "$PROJECT_SETTINGS" ]; then
             echo "ERROR: No settings.gradle or settings.gradle.kts was found."
             find . -maxdepth 4 -type f -not -path './.git/*' | sort
             exit 1
           fi
+
           PROJECT_DIR="$(dirname "$PROJECT_SETTINGS")"
+
           if [ ! -d "$PROJECT_DIR/app" ]; then
             echo "ERROR: Found Gradle settings at $PROJECT_DIR but no app directory there."
             find "$PROJECT_DIR" -maxdepth 3 -type f | sort
             exit 1
           fi
+
           echo "project_dir=$PROJECT_DIR" >> "$GITHUB_OUTPUT"
           echo "Android project: $PROJECT_DIR"
 
@@ -73,12 +78,15 @@ jobs:
         shell: bash
         run: |
           set -e
+
           APK="$(find app/build/outputs/apk/debug -maxdepth 1 -type f -name '*.apk' | head -n 1)"
+
           if [ -z "$APK" ]; then
             echo "ERROR: No debug APK was produced."
             find app/build/outputs -type f 2>/dev/null | sort || true
             exit 1
           fi
+
           echo "apk_path=$APK" >> "$GITHUB_OUTPUT"
           echo "APK: $APK"
 
